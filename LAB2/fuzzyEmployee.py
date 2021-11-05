@@ -93,10 +93,10 @@ bonusing = ctrl.ControlSystemSimulation(bonus_ctrl)
 Aby móc zasymulować nasz system trzeba podać przykładowe dane wejściowe w określonym przez nas przedziale
 """
 
-bonusing.input['punctuality'] = 5.8
-bonusing.input['tasks'] = 3
-bonusing.input['culture'] = 4
-bonusing.input['engagement'] = 1.8
+bonusing.input['punctuality'] = 6
+bonusing.input['tasks'] = 5.2
+bonusing.input['culture'] = 5.5
+bonusing.input['engagement'] = 4.5
 
 #Obliczane wyjście
 bonusing.compute()
