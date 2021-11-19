@@ -5,7 +5,10 @@ Movies recommendation system
 ======================================
 * Code inspired by the app from the class
 
-To run the program, install the following tools:
+To run the program, install the following tools(if you dont have):
+pip install numpy
+
+python/python3 main.py
 ...
 """
 
