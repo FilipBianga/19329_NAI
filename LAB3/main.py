@@ -1,9 +1,24 @@
+"""
+Autor: Filip Bianga
+======================================
+Movies recommendation system
+======================================
+* Code inspired by the app from the class
+
+To run the program, install the following tools:
+...
+"""
+
+"""
+A system that compares users and selects the best fit, 
+so you can choose which can be recommended and not recommended.
+"""
+
 import json
 from scores import euclidean_score
 
 
-# Funkcja wyświetla polecane / nie polecane filmy ,dla podanego użytkownika
-def getRecommendation(dataset, user_dict, user):
+def recommendationMovies(dataset, user_dict, user):
     if user not in dataset:
         raise TypeError("Cannot find " + user + " in the databases")
 
@@ -21,22 +36,22 @@ def getRecommendation(dataset, user_dict, user):
     sort_dict = dict(sorted(new_dict.items(), key=lambda element: element[1]))
 
     # The best 5 movies
-    recommendedMovies = dict(list(sort_dict.items())[-5:])
+    bestRecommendation = dict(list(sort_dict.items())[-5:])
 
     # The worst 5 movies
-    notRecommededMovies = dict(list(sort_dict.items())[:5])
+    worstRecommandation = dict(list(sort_dict.items())[:5])
 
     movieList = []
     i: int = 0
 
-    print('\nThe best recommendation movies:')
-    for movie in recommendedMovies:
+    print('\033[92m'+'\nThe best recommendation movies:')
+    for movie in bestRecommendation:
         print(movie)
         i += 1
         movieList.append(movie)
 
-    print('\nThe worst recommendation movies:')
-    for movie in notRecommededMovies:
+    print('\033[91m'+'\nThe worst recommendation movies:')
+    for movie in worstRecommandation:
         print(movie)
         i += 1
         movieList.append(movie)
@@ -45,9 +60,10 @@ def getRecommendation(dataset, user_dict, user):
 
 
 if __name__ == '__main__':
-
+    # Choose user
     user = 'Paweł Czapiewski'
 
+    # Load dataset in json
     ratings_file = 'rating.json'
     with open(ratings_file, 'r', encoding="utf-8") as f:
         data = json.loads(f.read())
@@ -57,6 +73,7 @@ if __name__ == '__main__':
         if item != user:
             scoreList.append({'score': euclidean_score(data, user, item), 'user': item})
 
+    print("\nUżytkownik: " + user)
     bestScore = max(scoreList, key=lambda x: x['score'])
     user_dict = data[bestScore['user']]
-    movieList = getRecommendation(data, user_dict, user)
+    movieList = recommendationMovies(data, user_dict, user)
