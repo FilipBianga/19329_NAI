@@ -47,7 +47,6 @@ class Awele(TwoPlayerGame):
             return
 
         move = "abcdefghijkl".index(move)
-# START - why AI always takes points from me from the letters "a", and I from AI always takes points from the letters "g"? Check it out
         pos = move
         for i in range(self.board[move]):
             pos = (pos + 1) % 12
@@ -61,11 +60,10 @@ class Awele(TwoPlayerGame):
             self.player.score += self.board[pos]
             self.board[pos] = 0
             pos = (pos - 1) % 12
-# END
     def possible_moves(self):
         """
-        A player must play any hole that contains enough seeds to
-        'feed' the opponent.
+        Gracz musi zagrać dowolny dołek, który zawiera wystarczającą ilość nasion, aby:
+        „nakarmić” przeciwnika.
         """
 
         if self.current_player == 1:
@@ -84,7 +82,7 @@ class Awele(TwoPlayerGame):
         return ["abcdefghijkl"[u] for u in moves]
 
     def show(self):
-        """ Print board and show score """
+        """ Narysuj tablice i pokaż wynik """
         print("Score: %d / %d" % tuple(p.score for p in self.players))
         print("  ".join("lkjihg"))
         print(" ".join(["%02d" % i for i in self.board[-1:-7:-1]]))
@@ -99,7 +97,7 @@ class Awele(TwoPlayerGame):
 
 
 if __name__ == "__main__":
-    # In what follows we setup the AI and launch a HP-vs-AI match.
+    # Poniżej konfigurujemy sztuczną inteligencję i uruchamiamy HP-vs-AI.
 
     from easyAI import Human_Player, AI_Player, Negamax
 
